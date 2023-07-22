@@ -1,0 +1,8 @@
+_BASE_: "ccsr.yml"
+
+loaders:
+  raw_internal_path_in: [t1_lr4sr, ]
+  raw_internal_path_out: [t1_hr4sr, ]
+  random_modality_in: False
+
+name: 'inhouse_stylegan3_sr8'

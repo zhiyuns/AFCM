@@ -1,0 +1,25 @@
+_BASE_: "../base.yml"
+
+model:
+  name: stylegan3
+  combine_ab: True
+  G:
+    netG: 'stylegan3'
+  D:
+    netD: 'comodgan'
+    epilogue_kwargs:
+      mbstd_group_size: 16
+loaders:
+  batch_size: 16
+optimizer:
+  lr_G: 0.0025
+  lr_D: 0.002
+scheduler:
+  ema:
+    enabled: True
+    ema_kimgs: 10
+    ramp: None
+loss:
+  blur_init_sigma: 10
+  blur_fade_kimg: 100
+name: 'ixi_stylegan3_translation_t1'

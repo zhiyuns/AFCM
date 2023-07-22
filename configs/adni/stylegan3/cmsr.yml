@@ -1,0 +1,36 @@
+_BASE_: "../base.yml"
+
+model:
+  name: stylegan3
+  combine_ab: True
+  G:
+    netG: 'stylegan3'
+    img_channels_in: 4
+    c_dim: 1
+  D:
+    netD: 'comodgan'
+    img_channels: 5
+    c_dim: 1
+    epilogue_kwargs:
+      mbstd_group_size: 16
+loaders:
+  batch_size: 16
+  slice_num: 4
+  thickness: [5,]
+  raw_internal_path_in: [flair, ]
+  raw_internal_path_out: [t1_hr4sr, ]
+optimizer:
+  lr_G: 0.0025
+  lr_D: 0.002
+scheduler:
+  n_epochs: 50
+  n_epochs_decay: 50
+  lr_decay_iters: 50
+  ema:
+    enabled: True
+    ema_kimgs: 10
+    ramp: None
+loss:
+  blur_init_sigma: 10
+  blur_fade_kimg: 100
+name: 'adni_stylegan3_cmsr'

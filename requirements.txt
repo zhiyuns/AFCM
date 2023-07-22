@@ -1,0 +1,12 @@
+python<=1.9
+dominate>=2.4.0
+visdom>=0.1.8.8
+scikit-image==0.19.3
+wandb
+SimpleITK
+nibabel
+scipy
+fvcore
+opencv-python
+h5py
+ninja

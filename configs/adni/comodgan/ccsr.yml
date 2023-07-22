@@ -1,0 +1,33 @@
+_BASE_: "../base.yml"
+
+model:
+  name: comodgan
+  combine_ab: True
+  G:
+    netG: 'comodgan'
+    c_dim: 1
+    img_channels_in: 4
+  D:
+    netD: 'comodgan'
+    c_dim: 1
+    img_channels: 5
+    epilogue_kwargs:
+      mbstd_group_size: 16
+loaders:
+  slice_num: 4
+  batch_size: 16
+  thickness: [5,]
+  raw_internal_path_in: [flair, ]
+  raw_internal_path_out: [t1_hr4sr,]
+optimizer:
+  lr: 0.0025
+scheduler:
+  n_epochs: 50
+  n_epochs_decay: 50
+  lr_decay_iters: 50
+  ema:
+    enabled: True
+    ema_kimgs: 10
+    ramp: None
+
+name: 'inhouse_comodgan_ccsr'

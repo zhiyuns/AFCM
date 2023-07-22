@@ -1,0 +1,12 @@
+_BASE_: "../../cmsr/base.yml"
+
+loaders:
+  raw_internal_path_in: [T2, ]
+  raw_internal_path_out: [PD, ]
+  label_internal_path: [PD, ]
+  train:
+    file_paths: ['../../data/public_data/ixi/h5list_translation/train',]
+  test:
+    ori_file_path: ../../data/public_data/ixi/registrated
+    file_paths: ['../../data/public_data/ixi/h5list_translation/test',]
+

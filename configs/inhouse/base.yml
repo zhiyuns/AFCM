@@ -1,0 +1,76 @@
+model:
+  name: pix2pix
+  combine_ab: True
+  G:
+    netG: unet_256
+  D:
+    netD: basic
+loss:
+  gan_mode: vanilla
+  lambda_L1: 100.0
+optimizer:
+  lr_G: 0.0002
+  lr_D: 0.0002
+  beta1: 0.5
+scheduler:
+  n_epochs: 50
+  lr_policy: linear
+  epoch_count: 1
+  n_epochs_decay: 50
+  lr_decay_iters: 50
+display:
+  display_id: 1
+  use_html: True
+  display_server: "http://localhost"
+  display_port: 8097
+  display_env: main
+  display_winsize: 256
+  display_ncols: 4
+trainer:
+  print_freq: 100
+  display_freq: 400
+  update_html_freq: 1000
+  save_latest_freq: 5000
+  save_epoch_freq: 25
+  save_by_iter: False
+loaders:
+  dataset_mode: cmsr
+  batch_size: 32
+  serial_batches: False
+  num_threads: 8
+  raw_internal_path_in: [T2_FLAIR, ]
+  raw_internal_path_out: [T1_HR,]
+  preprocess: 'none'
+  train:
+    file_paths: ['../../data/cmsr_data/registrated_h5list_translation/166183/train',]
+    slice_builder:
+      name: SliceBuilder
+      patch_shape: [1, 256, 256]
+      stride_shape: [1, 32, 32]
+      threshold: 0.0
+      slack_acceptance: 0.0
+      gray_threshold: 100
+      gray_percentile: 0.2
+    transformer:
+      raw:
+        Normalize:
+          enabled: True
+          min_value: 0.0
+          max_value: 255.0
+        ToTensor:
+          enabled: True
+          expand_dims: False
+      label:
+        ToTensor:
+          enabled: True
+          expand_dims: False
+  test:
+    ori_file_path: ../../data/cmsr_data/registrated
+    file_paths: [ '../../data/cmsr_data/registrated_h5list_translation/166183/test', ]
+
+name: 'cmsr_base'
+direction: 'AtoB'
+isTrain: True
+checkpoints_dir: './checkpoints'
+
+VERSION: 2

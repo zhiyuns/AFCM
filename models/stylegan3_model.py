@@ -11,7 +11,7 @@ class StyleGAN3Model(CoModGANModel):
         self.blur_sigma = 0
 
     def run_G(self, cond_img, update_emas=False, noise_mode='random'):
-        ref_img = self.extra_B if self.extra_b else self.real_B
+        ref_img = self.real_B
         ws = self.G_mapping(z=self.gen_z, c=self.gen_c, img_in=ref_img, update_emas=False)
         if self.style_mixing_prob > 0:
             cutoff = torch.empty([], dtype=torch.int64, device=ws.device).random_(1, ws.shape[1])
@@ -38,7 +38,7 @@ class StyleGAN3Model(CoModGANModel):
         _C.model.G.w_dim = 512
         _C.model.G.c_dim = 1
         _C.model.G.img_resolution = 256
-        _C.model.G.img_channels_in = 1
+        _C.model.G.img_channels_in = 4
         _C.model.G.img_channels_out = 1
 
         _C.model.G.synthesis_kwargs = CN()
@@ -70,7 +70,7 @@ class StyleGAN3Model(CoModGANModel):
         _C.model.D.channel_max = 512
         _C.model.D.c_dim = 0
         _C.model.D.img_resolution = 256
-        _C.model.D.img_channels = 2
+        _C.model.D.img_channels = 5
 
         _C.model.D.mapping_kwargs = CN()
         _C.model.D.mapping_kwargs.num_layers = 8

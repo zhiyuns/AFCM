@@ -40,6 +40,10 @@ loaders:
   num_threads: 8
   raw_internal_path_in: [T2_FLAIR, ]
   raw_internal_path_out: [T1_HR,]
+  thickness: [1]
+  rand_output: False
+  cat_inputs: False
+  slice_num: 4
   preprocess: 'none'
   train:
     file_paths: ['../../data/cmsr_data/registrated_h5list_translation/166183/train',]
@@ -57,10 +61,6 @@ loaders:
           enabled: True
           min_value: 0.0
           max_value: 255.0
-        ToTensor:
-          enabled: True
-          expand_dims: False
-      label:
         ToTensor:
           enabled: True
           expand_dims: False

@@ -1,9 +1,8 @@
-_BASE_: "../../cmsr/base.yml"
+_BASE_: "../../inhouse/base.yml"
 
 loaders:
   raw_internal_path_in: [PD, ]
   raw_internal_path_out: [T1, ]
-  label_internal_path: [PD, ]
   train:
     file_paths: ['../../data/public_data/ixi/h5list_translation/train',]
   test:

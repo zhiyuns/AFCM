@@ -202,6 +202,7 @@ class FilterSliceBuilder(SliceBuilder):
 def _loader_classes(class_name):
     modules = [
         'data.cmsr_dataset',
+        'data.cmsrnii_dataset',
         'data.utils'
     ]
     return get_class(class_name, modules)

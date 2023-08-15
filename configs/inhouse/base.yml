@@ -34,7 +34,7 @@ trainer:
   save_epoch_freq: 25
   save_by_iter: False
 loaders:
-  dataset_mode: cmsr
+  dataset_mode: cmsrnii
   batch_size: 32
   serial_batches: False
   num_threads: 8

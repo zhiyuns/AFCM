@@ -43,7 +43,7 @@ python train.py --config-file ./configs/adni/stylegan3/sr_5.yml --model stylegan
 ```
 For simultaneous cross-modality synthesis and super-resolution, you can follow our settings with
 ```.bash
-python train.py --config-file ./configs/adni/stylegan3/sr_5.yml --model stylegan3
+python train.py --config-file ./configs/adni/stylegan3/cmsr.yml --model stylegan3
 ```
 
 Once finishing training, you may get the results and the evaluation metrics by running

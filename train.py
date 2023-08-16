@@ -101,11 +101,11 @@ if __name__ == '__main__':
                         c_psnr.append(oneBEva[0])
                         c_ssim.append(oneBEva[1])
 
-                val_results = {'psnr': c_psnr[-1],
-                               'ssim': c_ssim[-1]}
+                val_results = {'psnr': np.mean(c_psnr),
+                               'ssim': np.mean(c_ssim)}
                 visualizer.plot_val_results(val_results)
 
-                ssim_new = c_ssim
+                ssim_new = np.mean(c_ssim)
                 if ssim_new > ssim_max:
                     ssim_max = ssim_new
                     model.save_networks('best')

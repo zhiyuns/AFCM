@@ -26,9 +26,9 @@ This repository is built upon [CycleGAN and pix2pix in PyTorch](https://github.c
 
 ## Preparing datasets
 
-Please make sure that the MR images of a subject have the same shape, which means you should pre-resample the LR image using nearest intepolation. The first slice of the MR images should be strictly aligned.
+Please make sure that the MR images of a subject have the same shape, which means you should pre-resample the LR image using the nearest intepolation. The first slice of the MR images should be strictly aligned.
 
-For training efficiency, we recommend to reformat the dataset as the h5py files. Please refer to `./data/prepare_h5.py` for preparing the h5py dataset.
+For training efficiency, we recommend reformatting the dataset as the h5 files. Please refer to `./data/prepare_h5.py` for preparing the h5 dataset. An example of the h5 file is placed at `./data/ixi_demo.h5`.
 
 Then, you need to split the dataset into training/validation/testing by putting them in the corresponding subdirs. You may need to modify the 'loaders.train/test.file_paths' in the config file.
 

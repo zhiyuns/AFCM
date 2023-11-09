@@ -35,6 +35,7 @@ def convert_h5(subject, data_path, out_path):
             img_nii = sitk.ReadImage(os.path.join(data_path, subject, subject+f'_{modality}.nii.gz'))
             img_data = sitk.GetArrayFromImage(img_nii)
             assert (img_data.shape[1] == 256 and img_data.shape[2] == 256)
+            img_data = rescale_intensity(img_data)
             img_data = np.around(img_data)
             img_data = np.clip(img_data, 0, 255)
             img_data = img_data.astype('uint8')
@@ -42,7 +43,7 @@ def convert_h5(subject, data_path, out_path):
             h5_file[modality] = img_data
     h5_file.close()
 
-data_path = r'./alighed_data'
+data_path = r'./registrated_data'
 out_path = r'./data_h5'
 os.makedirs(out_path, exist_ok=True)
 all_subject = os.listdir(data_path)

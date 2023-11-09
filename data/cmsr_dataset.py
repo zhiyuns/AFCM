@@ -11,8 +11,6 @@ from .get_util import get_logger
 from torch.utils.data import ConcatDataset
 logger = get_logger('TrainingSetup')
 
-GLOBAL_RANDOM_STATE = np.random.RandomState(50)
-
 def get_cls_label(shape, idx):
     onehot = np.zeros(shape, dtype=np.float32)
     onehot[idx] = 1

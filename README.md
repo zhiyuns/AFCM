@@ -28,9 +28,9 @@ This repository is built upon [CycleGAN and pix2pix in PyTorch](https://github.c
 
 Please make sure that the MR images of a subject have the same shape, which means you should pre-resample the LR image using nearest intepolation. The first slice of the MR images should be strictly aligned.
 
-The datasets for training should be reformatted as the h5py file. Please refer to `./data/prepare_h5.py` for preparing the dataset.
+For training efficiency, we recommend to reformat the dataset as the h5py files. Please refer to `./data/prepare_h5.py` for preparing the h5py dataset.
 
-Then, you need to split the dataset into training/validation/testing by putting them in the corresponding subdirs.
+Then, you need to split the dataset into training/validation/testing by putting them in the corresponding subdirs. You may need to modify the 'loaders.train/test.file_paths' in the config file.
 
 ## Getting started
 For cross-modality synthesis, you can follow our settings with
@@ -48,12 +48,22 @@ python train.py --config-file ./configs/adni/stylegan3/cmsr.yml --model stylegan
 
 Once finishing training, you may get the results and the evaluation metrics by running
 ```.bash
-python evaluate.py --config-file same/with/training.yml epoch latest
+python evaluate.py --config-file same/with/training.yml --model stylegan3 epoch latest
 ```
 
 ## Citation
 
-This will be updated once the paper is officially published
+```
+@InProceedings{AFCM,
+author="Song, Zhiyun and Wang, Xin and Zhao, Xiangyu and Wang, Sheng and Shen, Zhenrong and Zhuang, Zixu and Liu, Mengjun and Wang, Qian and Zhang, Lichi",
+title="Alias-Free Co-modulated Network for Cross-Modality Synthesis and Super-Resolution of MR Images",
+booktitle="Medical Image Computing and Computer Assisted Intervention -- MICCAI 2023",
+year="2023",
+publisher="Springer Nature Switzerland",
+address="Cham",
+pages="66--76",
+}
+```
 
 ## Development
 

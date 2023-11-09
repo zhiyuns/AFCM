@@ -19,7 +19,13 @@ scheduler:
   n_epochs_decay: 50
   lr_decay_iters: 50
 display:
-  display_id: 0
+  display_id: 1
+  use_html: True
+  display_server: "http://localhost"
+  display_port: 8097
+  display_env: main
+  display_winsize: 256
+  display_ncols: 4
 trainer:
   print_freq: 100
   display_freq: 400
@@ -51,10 +57,6 @@ loaders:
           enabled: True
           min_value: 0.0
           max_value: 255.0
-        ToTensor:
-          enabled: True
-          expand_dims: False
-      label:
         ToTensor:
           enabled: True
           expand_dims: False

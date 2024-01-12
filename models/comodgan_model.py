@@ -110,17 +110,10 @@ class CoModGANModel(Pix2PixModel):
     def forward(self):
         """Run forward pass; called by both functions <optimize_parameters> and <test>."""
         self.fake_B = self.run_G(self.real_A)  # G(A)
-        if self.sg:
-            self.pred_mask = self.netSG(self.fake_B.unsqueeze(1)).squeeze(1)
 
     def forward_ema(self):
         ref_img = self.extra_B if self.extra_b else self.real_B
         self.fake_B = self.netG_ema(z=self.gen_z, c=self.gen_c, cond_img=self.real_A, ref_img=ref_img, noise_mode='const')  # G(A)
-        if self.sg or not self.isTrain:
-            self.fake_B = self.fake_B.detach()
-            with torch.no_grad():
-                self.pred_mask = self.netSG(self.fake_B.unsqueeze(1))
-                self.pred_mask = torch.sigmoid(self.pred_mask.squeeze(1))
 
     def test(self):
         """Forward function used in test time.
@@ -171,10 +164,6 @@ class CoModGANModel(Pix2PixModel):
         self.loss_G_L1 = self.criterionL1(self.fake_B, self.real_B) * self.opt.loss.lambda_L1
         # combine loss and calculate gradients
         self.loss_G = self.loss_G_GAN + self.loss_G_L1
-        if self.sg:
-            self.loss_seg = self.criterionSeg(self.pred_mask, self.label)
-            self.loss_G += self.loss_seg * self.opt.loss.lambda_SG
-            self.pred_mask = torch.sigmoid(self.pred_mask)
         self.loss_G.backward()
 
     def optimize_parameters(self, **kwargs):

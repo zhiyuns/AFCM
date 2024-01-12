@@ -75,7 +75,7 @@ class CoModGANModel(Pix2PixModel):
         return _C
 
     def run_G(self, cond_img, noise_mode='random'):
-        ref_img = self.extra_B if self.extra_b else self.real_B
+        ref_img = self.real_B
         ws = self.G_mapping(z=self.gen_z, c=self.gen_c, img_in=ref_img)
         if self.style_mixing_prob > 0:
             cutoff = torch.empty([], dtype=torch.int64, device=ws.device).random_(1, ws.shape[1])
@@ -112,7 +112,7 @@ class CoModGANModel(Pix2PixModel):
         self.fake_B = self.run_G(self.real_A)  # G(A)
 
     def forward_ema(self):
-        ref_img = self.extra_B if self.extra_b else self.real_B
+        ref_img = self.real_B
         self.fake_B = self.netG_ema(z=self.gen_z, c=self.gen_c, cond_img=self.real_A, ref_img=ref_img, noise_mode='const')  # G(A)
 
     def test(self):
@@ -135,12 +135,6 @@ class CoModGANModel(Pix2PixModel):
         self.loss_D_fake = (torch.nn.functional.softplus(gen_logits)).mean()
         self.loss_D_fake.backward()
         # Real
-        '''
-        if self.extra_b:
-            real_AB = self.extra_B
-        else:
-            real_AB = torch.cat((self.real_A, self.real_B), 1) if self.combine_ab else self.real_B
-        '''
         real_AB = torch.cat((self.real_A, self.real_B), 1) if self.combine_ab else self.real_B
         real_img_tmp = real_AB.detach().requires_grad_(True)
         real_logits = self.run_D(real_img_tmp, c=self.gen_c)

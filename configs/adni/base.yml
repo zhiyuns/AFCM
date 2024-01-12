@@ -42,7 +42,7 @@ loaders:
   raw_internal_path_out: [t1, ]
   preprocess: 'none'
   train:
-    file_paths: [ '../../data/public_data/ADNI/h5list_translation/train', ]
+    file_paths: [ '../../data/public_data/ADNI/h5list/train', ]
     slice_builder:
       name: SliceBuilder
       patch_shape: [1, 256, 256]
@@ -62,7 +62,7 @@ loaders:
           expand_dims: False
   test:
     ori_file_path: '../../data/public_data/ADNI/registrated'
-    file_paths: [ '../../data/public_data/ADNI/h5list_translation/test', ]
+    file_paths: [ '../../data/public_data/ADNI/h5list/test', ]
 
 name: 'cmsr_base'
 direction: 'AtoB'

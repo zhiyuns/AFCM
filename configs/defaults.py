@@ -153,7 +153,7 @@ _C.scheduler.ema.ema_kimgs = 10
 _C.scheduler.ema.ramp = None
 
 _C.display = CN()
-_C.display.display_id = 0
+_C.display.display_id = -1
 _C.display.use_html = False
 _C.display.display_server = "http://localhost"
 _C.display.display_port = 8097
@@ -161,7 +161,7 @@ _C.display.display_env = 'main'
 #  visdom display environment name (default is "main")
 _C.display.display_winsize = 256
 _C.display.display_ncols = 4
-_C.display.use_wandb = True
+_C.display.use_wandb = False
 _C.display.wandb_project_name = 'cmsr'
 
 _C.trainer = CN()

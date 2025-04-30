@@ -58,6 +58,7 @@ class AbstractHDF5Dataset(ConfigDataset):
         self.raw_internal_path = raw_internal_path = list(set(self.raw_internal_path_in + self.raw_internal_path_out))
         self.thickness = thickness
         self.slice_num = slice_num
+        self.mirror_padding = None
 
         input_file = self.create_h5_file(file_path)
 

@@ -114,7 +114,7 @@ class Pix2PixModel(BaseModel):
 
     def set_test_input(self, input, slice_idx, indices):
         self.real_A = input.to(self.device)
-        self.slice_idx = slice_idx.to(self.device) if self.extra_b else None
+        self.slice_idx = slice_idx.to(self.device)
 
     def forward(self):
         """Run forward pass; called by both functions <optimize_parameters> and <test>."""

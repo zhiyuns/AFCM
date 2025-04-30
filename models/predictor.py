@@ -163,7 +163,10 @@ class StandardPredictor(_AbstractPredictor):
                 # wrap predictions into a list if there is only one output head from the network
                 if output_heads == 3:
                     predictions = [predictions]
-                    prediction_label = self.model.pred_mask
+                    if 'pred_mask' in self.model.__dict__:
+                        prediction_label = self.model.pred_mask
+                    else:
+                        prediction_label = torch.zeros_like(predictions[0])
                     if len(prediction_label.size()) == 4:
                         prediction_label = prediction_label.unsqueeze(1)
                     predictions.append(prediction_label)
